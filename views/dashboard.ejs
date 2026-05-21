@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Dashboard
+  </title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Poppins",sans-serif;
+    }
+
+    body{
+
+      min-height:100vh;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0f172a,
+          #1e1b4b,
+          #312e81
+        );
+
+      overflow-x:hidden;
+
+      color:white;
+
+      position:relative;
+    }
+
+    /* Animated Background */
+
+    .blob{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(60px);
+      opacity:0.5;
+      animation:float 10s infinite ease-in-out;
+      z-index:0;
+    }
+
+    .blob1{
+      width:350px;
+      height:350px;
+      background:#7c3aed;
+      top:-100px;
+      left:-100px;
+    }
+
+    .blob2{
+      width:300px;
+      height:300px;
+      background:#06b6d4;
+      bottom:-100px;
+      right:-100px;
+      animation-delay:2s;
+    }
+
+    .blob3{
+      width:220px;
+      height:220px;
+      background:#ec4899;
+      top:50%;
+      left:60%;
+      animation-delay:4s;
+    }
+
+    @keyframes float{
+
+      0%{
+        transform:
+          translateY(0px)
+          scale(1);
+      }
+
+      50%{
+        transform:
+          translateY(-30px)
+          scale(1.1);
+      }
+
+      100%{
+        transform:
+          translateY(0px)
+          scale(1);
+      }
+
+    }
+
+    /* Layout */
+
+    .dashboard{
+
+      display:flex;
+
+      min-height:100vh;
+
+      position:relative;
+      z-index:10;
+    }
+
+    /* Sidebar */
+
+    .sidebar{
+
+      width:260px;
+
+      background:
+        rgba(255,255,255,0.08);
+
+      backdrop-filter:blur(20px);
+
+      border-right:
+        1px solid rgba(255,255,255,0.1);
+
+      padding:30px 25px;
+    }
+
+    .logo{
+
+      font-size:28px;
+      font-weight:700;
+
+      margin-bottom:50px;
+
+      color:white;
+    }
+
+    .nav-links{
+
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .nav-links a{
+
+      text-decoration:none;
+
+      color:white;
+
+      padding:14px 18px;
+
+      border-radius:14px;
+
+      transition:0.3s ease;
+
+      background:
+        rgba(255,255,255,0.05);
+    }
+
+    .nav-links a:hover{
+
+      background:
+        rgba(255,255,255,0.15);
+
+      transform:translateX(5px);
+    }
+
+    /* Main Content */
+
+    .main{
+
+      flex:1;
+
+      padding:40px;
+    }
+
+    /* Header */
+
+    .topbar{
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      margin-bottom:40px;
+    }
+
+    .welcome h1{
+      font-size:2.3rem;
+      margin-bottom:8px;
+    }
+
+    .welcome p{
+      color:rgba(255,255,255,0.7);
+    }
+
+    .profile{
+
+      width:65px;
+      height:65px;
+
+      border-radius:50%;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #06b6d4
+        );
+
+      font-size:24px;
+      font-weight:700;
+
+      box-shadow:
+        0 10px 20px rgba(0,0,0,0.25);
+    }
+
+    /* Cards */
+
+    .cards{
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+      gap:25px;
+
+      margin-bottom:35px;
+    }
+
+    .card{
+
+      background:
+        rgba(255,255,255,0.08);
+
+      backdrop-filter:blur(18px);
+
+      border:
+        1px solid rgba(255,255,255,0.1);
+
+      border-radius:22px;
+
+      padding:25px;
+
+      transition:0.3s ease;
+    }
+
+    .card:hover{
+
+      transform:translateY(-6px);
+
+      box-shadow:
+        0 15px 30px rgba(0,0,0,0.25);
+    }
+
+    .card h3{
+
+      font-size:15px;
+
+      color:rgba(255,255,255,0.7);
+
+      margin-bottom:14px;
+    }
+
+    .card h2{
+      font-size:2rem;
+    }
+
+    /* User Card */
+
+    .user-card{
+
+      background:
+        rgba(255,255,255,0.08);
+
+      backdrop-filter:blur(18px);
+
+      border:
+        1px solid rgba(255,255,255,0.1);
+
+      border-radius:24px;
+
+      padding:35px;
+
+      margin-bottom:30px;
+    }
+
+    .user-card h2{
+      margin-bottom:10px;
+      font-size:2rem;
+    }
+
+    .user-card p{
+      color:rgba(255,255,255,0.7);
+      margin-bottom:30px;
+    }
+
+    /* Buttons */
+
+    .actions{
+
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+
+      text-decoration:none;
+
+      padding:14px 26px;
+
+      border-radius:14px;
+
+      font-weight:600;
+
+      transition:0.3s ease;
+
+      display:inline-block;
+    }
+
+    .btn-primary{
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #06b6d4
+        );
+
+      color:white;
+    }
+
+    .btn-danger{
+
+      background:
+        linear-gradient(
+          135deg,
+          #ef4444,
+          #dc2626
+        );
+
+      color:white;
+    }
+
+    .btn:hover{
+
+      transform:translateY(-3px);
+
+      box-shadow:
+        0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Activity Section */
+
+    .activity{
+
+      background:
+        rgba(255,255,255,0.08);
+
+      backdrop-filter:blur(18px);
+
+      border:
+        1px solid rgba(255,255,255,0.1);
+
+      border-radius:24px;
+
+      padding:30px;
+    }
+
+    .activity h2{
+      margin-bottom:20px;
+    }
+
+    .activity-item{
+
+      display:flex;
+      justify-content:space-between;
+
+      padding:15px 0;
+
+      border-bottom:
+        1px solid rgba(255,255,255,0.08);
+    }
+
+    .activity-item:last-child{
+      border:none;
+    }
+
+    .activity-item span{
+      color:rgba(255,255,255,0.7);
+    }
+
+    /* Responsive */
+
+    @media(max-width:900px){
+
+      .dashboard{
+        flex-direction:column;
+      }
+
+      .sidebar{
+        width:100%;
+      }
+
+      .main{
+        padding:25px;
+      }
+
+      .topbar{
+        flex-direction:column;
+        gap:20px;
+        align-items:flex-start;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Animated Blobs -->
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <!-- Dashboard -->
+
+  <div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+      <div class="logo">
+        AuthApp
+      </div>
+
+      <div class="nav-links">
+
+        <a href="#">
+          Dashboard
+        </a>
+
+        <a href="/change-password">
+          Change Password
+        </a>
+
+        <a href="/logout">
+          Logout
+        </a>
+
+      </div>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main">
+
+      <!-- Header -->
+
+      <div class="topbar">
+
+        <div class="welcome">
+
+          <h1>
+            Welcome Back 👋
+          </h1>
+
+          <p>
+            Here’s your personalized dashboard overview.
+          </p>
+
+        </div>
+
+        <div class="profile">
+
+          <%= user.name.charAt(0).toUpperCase() %>
+
+        </div>
+
+      </div>
+
+      <!-- Stats -->
+
+      <div class="cards">
+
+        <div class="card">
+
+          <h3>
+            Account Status
+          </h3>
+
+          <h2>
+            Active
+          </h2>
+
+        </div>
+
+        <div class="card">
+
+          <h3>
+            Security Level
+          </h3>
+
+          <h2>
+            High
+          </h2>
+
+        </div>
+
+        <div class="card">
+
+          <h3>
+            Login Sessions
+          </h3>
+
+          <h2>
+            12
+          </h2>
+
+        </div>
+
+      </div>
+
+      <!-- User Info -->
+
+      <div class="user-card">
+
+        <h2>
+          <%= user.name %>
+        </h2>
+
+        <p>
+          <%= user.email %>
+        </p>
+
+        <div class="actions">
+
+          <a
+            href="/change-password"
+            class="btn btn-primary"
+          >
+            Change Password
+          </a>
+
+          <a
+            href="/logout"
+            class="btn btn-danger"
+          >
+            Logout
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Activity -->
+
+      <div class="activity">
+
+        <h2>
+          Recent Activity
+        </h2>
+
+        <div class="activity-item">
+
+          <p>
+            Logged into dashboard
+          </p>
+
+          <span>
+            Just now
+          </span>
+
+        </div>
+
+        <div class="activity-item">
+
+          <p>
+            Updated account settings
+          </p>
+
+          <span>
+            2 hours ago
+          </span>
+
+        </div>
+
+        <div class="activity-item">
+
+          <p>
+            Password last changed
+          </p>
+
+          <span>
+            5 days ago
+          </span>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+
+</html>

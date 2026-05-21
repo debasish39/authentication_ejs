@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Auth System
+  </title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Poppins",sans-serif;
+    }
+
+    body{
+
+      min-height:100vh;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0f172a,
+          #1e1b4b,
+          #312e81
+        );
+
+      overflow-x:hidden;
+
+      color:white;
+
+      position:relative;
+    }
+
+    /* Animated Blobs */
+
+    .blob{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(70px);
+      opacity:0.55;
+      animation:float 12s infinite ease-in-out;
+      z-index:0;
+    }
+
+    .blob1{
+      width:350px;
+      height:350px;
+      background:#7c3aed;
+      top:-120px;
+      left:-120px;
+    }
+
+    .blob2{
+      width:300px;
+      height:300px;
+      background:#06b6d4;
+      bottom:-120px;
+      right:-100px;
+      animation-delay:2s;
+    }
+
+    .blob3{
+      width:220px;
+      height:220px;
+      background:#ec4899;
+      top:45%;
+      left:65%;
+      animation-delay:4s;
+    }
+
+    @keyframes float{
+
+      0%{
+        transform:
+          translateY(0px)
+          scale(1);
+      }
+
+      50%{
+        transform:
+          translateY(-35px)
+          scale(1.08);
+      }
+
+      100%{
+        transform:
+          translateY(0px)
+          scale(1);
+      }
+
+    }
+
+    /* Navbar */
+
+    .navbar{
+
+      width:100%;
+
+      padding:25px 8%;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      position:relative;
+      z-index:10;
+    }
+
+    .logo{
+
+      font-size:28px;
+      font-weight:800;
+
+      letter-spacing:1px;
+    }
+
+    .nav-links{
+
+      display:flex;
+      gap:18px;
+    }
+
+    .nav-links a{
+
+      text-decoration:none;
+
+      color:white;
+
+      padding:12px 22px;
+
+      border-radius:14px;
+
+      transition:0.3s ease;
+    }
+
+    .nav-links a:hover{
+
+      background:
+        rgba(255,255,255,0.1);
+
+      backdrop-filter:blur(10px);
+    }
+
+    .register-btn{
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #06b6d4
+        );
+    }
+
+    /* Hero */
+
+    .hero{
+
+      min-height:calc(100vh - 90px);
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      padding:40px 8%;
+
+      position:relative;
+      z-index:10;
+    }
+
+    .hero-container{
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(auto-fit,minmax(320px,1fr));
+
+      gap:50px;
+
+      align-items:center;
+
+      width:100%;
+      max-width:1300px;
+    }
+
+    /* Left Content */
+
+    .hero-text h1{
+
+      font-size:4rem;
+
+      line-height:1.1;
+
+      margin-bottom:24px;
+
+      font-weight:800;
+    }
+
+    .hero-text h1 span{
+
+      background:
+        linear-gradient(
+          135deg,
+          #06b6d4,
+          #7c3aed,
+          #ec4899
+        );
+
+      -webkit-background-clip:text;
+
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-text p{
+
+      color:rgba(255,255,255,0.72);
+
+      font-size:18px;
+
+      line-height:1.8;
+
+      margin-bottom:35px;
+
+      max-width:600px;
+    }
+
+    /* Buttons */
+
+    .buttons{
+
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+
+      text-decoration:none;
+
+      padding:16px 32px;
+
+      border-radius:16px;
+
+      font-weight:600;
+
+      transition:0.3s ease;
+
+      display:inline-block;
+    }
+
+    .btn-primary{
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #06b6d4
+        );
+
+      color:white;
+    }
+
+    .btn-secondary{
+
+      background:
+        rgba(255,255,255,0.08);
+
+      backdrop-filter:blur(16px);
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+
+      color:white;
+    }
+
+    .btn:hover{
+
+      transform:translateY(-4px);
+
+      box-shadow:
+        0 12px 24px rgba(0,0,0,0.25);
+    }
+
+    /* Right Side Dashboard */
+
+    .dashboard-preview{
+
+      background:
+        rgba(255,255,255,0.08);
+
+      backdrop-filter:blur(18px);
+
+      border:
+        1px solid rgba(255,255,255,0.12);
+
+      border-radius:28px;
+
+      padding:30px;
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,0.3);
+
+      animation:fadeUp 1s ease;
+    }
+
+    @keyframes fadeUp{
+
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+    .dashboard-header{
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      margin-bottom:25px;
+    }
+
+    .dashboard-header h3{
+      font-size:20px;
+    }
+
+    .profile{
+
+      width:50px;
+      height:50px;
+
+      border-radius:50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #06b6d4
+        );
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      font-weight:700;
+    }
+
+    /* Cards */
+
+    .cards{
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(2,1fr);
+
+      gap:18px;
+    }
+
+    .card{
+
+      background:
+        rgba(255,255,255,0.06);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      border-radius:20px;
+
+      padding:22px;
+
+      transition:0.3s ease;
+    }
+
+    .card:hover{
+
+      transform:translateY(-5px);
+
+      background:
+        rgba(255,255,255,0.1);
+    }
+
+    .card h4{
+
+      color:rgba(255,255,255,0.75);
+
+      margin-bottom:14px;
+
+      font-size:14px;
+    }
+
+    .card h2{
+      font-size:28px;
+    }
+
+    .card.large{
+      grid-column:span 2;
+    }
+
+    /* Footer */
+
+    .footer{
+
+      text-align:center;
+
+      padding:30px;
+
+      color:rgba(255,255,255,0.6);
+
+      position:relative;
+      z-index:10;
+    }
+
+    /* Responsive */
+
+    @media(max-width:900px){
+
+      .hero-text h1{
+        font-size:3rem;
+      }
+
+      .hero{
+        padding-top:20px;
+      }
+
+      .navbar{
+        flex-direction:column;
+        gap:20px;
+      }
+
+    }
+
+    @media(max-width:600px){
+
+      .hero-text h1{
+        font-size:2.4rem;
+      }
+
+      .cards{
+        grid-template-columns:1fr;
+      }
+
+      .card.large{
+        grid-column:span 1;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Animated Background -->
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <!-- Navbar -->
+
+  <nav class="navbar">
+
+    <div class="logo">
+      AuthApp
+    </div>
+
+    <div class="nav-links">
+
+      <a href="/login">
+        Login
+      </a>
+
+      <a
+        href="/register"
+        class="register-btn"
+      >
+        Register
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- Hero -->
+
+  <section class="hero">
+
+    <div class="hero-container">
+
+      <!-- Left -->
+
+      <div class="hero-text">
+
+        <h1>
+          Secure Modern
+          <span>
+            Authentication
+          </span>
+          System
+        </h1>
+
+        <p>
+          Experience premium authentication with
+          secure login, JWT protection,
+          password recovery, and a futuristic
+          dashboard UI designed with modern
+          SaaS aesthetics.
+        </p>
+
+        <div class="buttons">
+
+          <a
+            href="/login"
+            class="btn btn-primary"
+          >
+            Get Started
+          </a>
+
+          <a
+            href="/register"
+            class="btn btn-secondary"
+          >
+            Create Account
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Right -->
+
+      <div class="dashboard-preview">
+
+        <div class="dashboard-header">
+
+          <h3>
+            Dashboard Preview
+          </h3>
+
+          <div class="profile">
+            A
+          </div>
+
+        </div>
+
+        <div class="cards">
+
+          <div class="card">
+
+            <h4>
+              Security Score
+            </h4>
+
+            <h2>
+              98%
+            </h2>
+
+          </div>
+
+          <div class="card">
+
+            <h4>
+              Active Sessions
+            </h4>
+
+            <h2>
+              12
+            </h2>
+
+          </div>
+
+          <div class="card large">
+
+            <h4>
+              Authentication Status
+            </h4>
+
+            <h2>
+              Fully Protected 🔒
+            </h2>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+
+  <footer class="footer">
+
+    © 2026 AuthApp • Modern Authentication System
+
+  </footer>
+
+</body>
+
+</html>
