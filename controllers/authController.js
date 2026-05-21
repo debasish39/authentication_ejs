@@ -306,7 +306,7 @@ const forgotPassword = async (
     // RESET LINK
 
     const resetLink =
-`http://localhost:3000/reset-password/${resetToken}`;
+`https://authentication-ejs.onrender.com/reset-password/${resetToken}`;
 
     // SEND EMAIL USING RESEND
 
