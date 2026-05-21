@@ -310,38 +310,295 @@ const forgotPassword = async (
 
     // SEND EMAIL USING RESEND
 
-    await resend.emails.send({
+   await resend.emails.send({
 
-      from:
-        "noreply@debasish.xyz",
+  from:
+    "AuthApp <noreply@debasish.xyz>",
 
-      to:
-        user.email,
+  to:
+    user.email,
 
-      subject:
-        "Password Reset",
+  subject:
+    "Reset Your Password",
 
-     html:
+  html:
 `
-<h2>Password Reset</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>
-You requested a password reset.
-</p>
+<head>
 
-<p>
-Click below:
-</p>
+<meta charset="UTF-8" />
 
-<a href="${resetLink}">
-Reset Password
-</a>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
 
-<p>
-This link expires in 15 minutes.
-</p>
+<title>
+  Reset Your Password
+</title>
+
+</head>
+
+<body style="
+  margin:0;
+  padding:0;
+  background:#eef2ff;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+">
+
+  <!-- Outer Wrapper -->
+
+  <table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    style="
+      background:
+        linear-gradient(
+          135deg,
+          #4f46e5,
+          #7c3aed,
+          #06b6d4
+        );
+      padding:40px 20px;
+    "
+  >
+
+    <tr>
+
+      <td align="center">
+
+        <!-- Main Container -->
+
+        <table
+          width="100%"
+          cellpadding="0"
+          cellspacing="0"
+          border="0"
+          style="
+            max-width:560px;
+            background:#ffffff;
+            border-radius:28px;
+            overflow:hidden;
+            box-shadow:
+              0 12px 35px rgba(0,0,0,0.15);
+          "
+        >
+
+          <!-- Header -->
+
+          <tr>
+
+            <td
+              align="center"
+              style="
+                padding:50px 35px;
+                background:
+                  linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                  );
+                color:white;
+              "
+            >
+
+              <!-- Logo -->
+
+              
+              <h1 style="
+                margin:0;
+                font-size:34px;
+                line-height:1.3;
+                font-weight:700;
+              ">
+                Password Reset
+              </h1>
+
+              <p style="
+                margin-top:14px;
+                font-size:16px;
+                line-height:1.7;
+                color:
+                  rgba(255,255,255,0.85);
+              ">
+                Secure account recovery for your AuthApp account.
+              </p>
+
+            </td>
+
+          </tr>
+
+          <!-- Content -->
+
+          <tr>
+
+            <td
+              style="
+                padding:45px 35px;
+                color:#374151;
+              "
+            >
+
+              <p style="
+                margin-top:0;
+                font-size:16px;
+                line-height:1.8;
+              ">
+                Hello,
+              </p>
+
+              <p style="
+                font-size:16px;
+                line-height:1.9;
+                color:#4b5563;
+              ">
+                We received a request to reset your password.
+                Click the secure button below to continue.
+              </p>
+
+              <!-- CTA Button -->
+
+              <table
+                width="100%"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+                style="
+                  margin:40px 0;
+                "
+              >
+
+                <tr>
+
+                  <td align="center">
+
+                    <a
+                      href="${resetLink}"
+                      style="
+                        display:inline-block;
+                        padding:18px 36px;
+                        background:
+                          linear-gradient(
+                            135deg,
+                            #7c3aed,
+                            #06b6d4
+                          );
+                        color:white;
+                        text-decoration:none;
+                        font-size:16px;
+                        font-weight:bold;
+                        border-radius:16px;
+                        box-shadow:
+                          0 8px 20px rgba(124,58,237,0.3);
+                      "
+                    >
+                      Reset Password
+                    </a>
+
+                  </td>
+
+                </tr>
+
+              </table>
+
+              <!-- Security Box -->
+
+              <table
+                width="100%"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+                style="
+                  background:#f9fafb;
+                  border-left:
+                    5px solid #7c3aed;
+                  border-radius:14px;
+                  padding:22px;
+                  margin-top:10px;
+                "
+              >
+
+                <tr>
+
+                  <td>
+
+                    <p style="
+                      margin:0;
+                      font-size:15px;
+                      line-height:1.8;
+                      color:#4b5563;
+                    ">
+                      ⏳ This reset link expires in
+                      <strong>15 minutes</strong>
+                      for security reasons.
+                    </p>
+
+                  </td>
+
+                </tr>
+
+              </table>
+
+              <!-- Security Note -->
+
+              <p style="
+                margin-top:35px;
+                font-size:15px;
+                line-height:1.9;
+                color:#6b7280;
+              ">
+                If you didn’t request this password reset,
+                you can safely ignore this email.
+                Your account will remain secure.
+              </p>
+
+            </td>
+
+          </tr>
+
+          <!-- Footer -->
+
+          <tr>
+
+            <td
+              align="center"
+              style="
+                padding:28px;
+                background:#f9fafb;
+                color:#6b7280;
+                font-size:13px;
+                line-height:1.8;
+              "
+            >
+
+              © 2026 AuthApp <br />
+
+              Secure Authentication System
+
+            </td>
+
+          </tr>
+
+        </table>
+
+      </td>
+
+    </tr>
+
+  </table>
+
+</body>
+
+</html>
 `,
-    });
+});
 
     res.redirect("/login");
 
