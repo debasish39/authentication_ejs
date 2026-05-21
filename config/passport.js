@@ -22,7 +22,7 @@ passport.use(
         process.env.GOOGLE_CLIENT_SECRET,
 
       callbackURL:
-"http://localhost:3000/auth/google/callback",
+"https://authentication-ejs.onrender.com/auth/google/callback",
 
     },
 
