@@ -20,6 +20,10 @@ const userSchema =
       },
       resetToken: String,
       resetTokenExpire: Date,
+      googleId: {
+        type: String,
+        default: "",
+      }
     },
     {
       timestamps: true,

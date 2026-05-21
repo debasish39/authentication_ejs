@@ -47,11 +47,11 @@
       justify-content:center;
       align-items:center;
 
-      overflow:hidden;
+      overflow-x:hidden;
 
       background:
-        linear-gradient(
-          135deg,
+        conic-gradient(
+          
           #4f46e5,
           #7c3aed,
           #06b6d4
@@ -125,7 +125,7 @@
       width:90%;
       max-width:420px;
 
-      padding:45px;
+      padding:30px;
 
       border-radius:24px;
 
@@ -307,7 +307,7 @@
 
     .links{
 
-      margin-top:22px;
+      margin-top:12px;
 
       display:flex;
       justify-content:space-between;
@@ -317,6 +317,86 @@
 
       gap:10px;
     }
+    /* Divider */
+
+.divider{
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  margin:2px 0 22px;
+
+  position:relative;
+}
+
+.divider::before,
+.divider::after{
+
+  content:"";
+
+  flex:1;
+
+  height:1px;
+
+  background:
+    rgba(255,255,255,0.2);
+}
+
+.divider span{
+
+  padding:0 14px;
+
+  color:white;
+
+  font-size:13px;
+
+  letter-spacing:1px;
+}
+
+/* Google Button */
+
+.google-btn{
+
+  /* width:100%; */
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:12px;
+
+  padding:15px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,0.12);
+
+  border:
+    1px solid rgba(255,255,255,0.15);
+
+  backdrop-filter:blur(12px);
+
+  color:white;
+
+  text-decoration:none;
+
+  font-weight:600;
+
+  transition:0.3s ease;
+}
+
+.google-btn:hover{
+
+  transform:translateY(-3px);
+
+  background:
+    rgba(255,255,255,0.18);
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.2);
+}
 
     .links a{
 
@@ -426,17 +506,67 @@
 
     </form>
 
-    <div class="links">
+   <div class="links">
 
-      <a href="/forgot-password">
-        Forgot Password?
-      </a>
+  <a href="/forgot-password">
+    Forgot Password?
+  </a>
 
-      <a href="/register">
-        Create Account
-      </a>
+  <a href="/register">
+    Create Account
+  </a>
 
-    </div>
+</div>
+
+<!-- Divider -->
+
+<div class="divider">
+
+  <span>
+    OR
+  </span>
+
+</div>
+
+<!-- Google Login -->
+
+<a
+  href="/auth/google"
+  class="google-btn"
+>
+
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 48 48"
+    width="22px"
+    height="22px"
+  >
+
+    <path
+      fill="#FFC107"
+      d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12S17.4 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"
+    />
+
+    <path
+      fill="#FF3D00"
+      d="M6.3 14.7l6.6 4.8C14.7 16 19 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.1 29.3 4 24 4c-7.7 0-14.3 4.3-17.7 10.7z"
+    />
+
+    <path
+      fill="#4CAF50"
+      d="M24 44c5.2 0 10-2 13.5-5.3l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.2-8l-6.5 5C9.6 39.5 16.3 44 24 44z"
+    />
+
+    <path
+      fill="#1976D2"
+      d="M43.6 20.5H42V20H24v8h11.3c-1.1 3-3.3 5.5-6.2 7.1l6.2 5.2C39.6 36.5 44 30.8 44 24c0-1.3-.1-2.7-.4-3.5z"
+    />
+
+  </svg>
+
+  Continue with Google
+
+</a>
 
   </div>
 

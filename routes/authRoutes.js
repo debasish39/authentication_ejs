@@ -2,7 +2,12 @@ import express from "express";
 
 const router = express.Router();
 
+import jwt from "jsonwebtoken";
+
+import passport from "passport";
+
 import {
+
   homePage,
   registerPage,
   loginPage,
@@ -16,12 +21,10 @@ import {
   forgotPassword,
   resetPasswordPage,
   resetPassword,
-  
+
 } from "../controllers/authController.js";
 
 import authMiddleware from "../middleware/authMiddleware.js";
-
-
 
 /* =====================================
    ROUTES
@@ -75,7 +78,60 @@ router.post(
   "/reset-password/:token",
   resetPassword
 );
+router.get(
 
+  "/auth/google",
 
+  passport.authenticate(
+    "google",
+    {
+      scope:
+        ["profile", "email"],
+    }
+  )
+
+);
+
+router.get(
+
+  "/auth/google/callback",
+
+  passport.authenticate(
+    "google",
+    {
+      failureRedirect:
+        "/login",
+    }
+  ),
+
+  async (req, res) => {
+
+    // GENERATE JWT
+
+    const token = jwt.sign(
+
+      {
+        id: req.user._id,
+      },
+
+      process.env.JWT_SECRET,
+
+      {
+        expiresIn: "7d",
+      }
+
+    );
+
+    // STORE COOKIE
+
+    res.cookie("token", token, {
+      httpOnly: true,
+    });
+
+    res.redirect("/dashboard");
+
+  }
+
+);
 
 export default router;

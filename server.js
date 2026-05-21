@@ -6,7 +6,11 @@ import express from "express";
 import cors from "cors";
 
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
+import passport from "passport";
+
+import "./config/passport.js";
 import path from "path";
 
 import { fileURLToPath } from "url";
@@ -40,7 +44,24 @@ const __dirname =
 connectDB();
 
 
+app.use(
 
+  session({
+
+    secret:
+      process.env.JWT_SECRET,
+
+    resave: false,
+
+    saveUninitialized: false,
+
+  })
+
+);
+
+app.use(passport.initialize());
+
+app.use(passport.session());
 /* =====================================
    MIDDLEWARE
 ===================================== */

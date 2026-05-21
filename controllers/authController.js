@@ -78,7 +78,88 @@ const registerUser = async (
       email,
       password: hashedPassword,
     });
+await resend.emails.send({
 
+  from:
+    "AuthApp <noreply@debasish.xyz>",
+
+  to:
+    email,
+
+  subject:
+    "Welcome to AuthApp",
+
+  html:
+`
+<!DOCTYPE html>
+<html>
+
+<body style="
+  font-family:Arial;
+  background:#f3f4f6;
+  padding:40px;
+">
+
+  <div style="
+    max-width:600px;
+    margin:auto;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+  ">
+
+    <h1 style="
+      color:#7c3aed;
+    ">
+      Welcome ${name} 🎉
+    </h1>
+
+    <p style="
+      font-size:16px;
+      line-height:1.8;
+      color:#4b5563;
+    ">
+      Your account has been successfully created.
+    </p>
+
+    <p style="
+      font-size:16px;
+      line-height:1.8;
+      color:#4b5563;
+    ">
+      You can now securely login and use AuthApp.
+    </p>
+
+    <a
+      href="https://authentication-ejs.onrender.com/login"
+      style="
+        display:inline-block;
+        margin-top:20px;
+        background:#7c3aed;
+        color:white;
+        padding:14px 28px;
+        text-decoration:none;
+        border-radius:10px;
+      "
+    >
+      Login Now
+    </a>
+
+    <p style="
+      margin-top:40px;
+      color:#9ca3af;
+      font-size:14px;
+    ">
+      © 2026 AuthApp
+    </p>
+
+  </div>
+
+</body>
+
+</html>
+`,
+});
     res.redirect("/login");
 
   } catch (error) {
